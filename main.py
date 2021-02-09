@@ -3,6 +3,7 @@ from absl import flags
 import pandas as pd 
 from reader import * 
 from power_inequality import power_inequality
+from edge_organizer import esimate_params
 
 
 flags.DEFINE_string('network_type', 'gender', 'The type of network: gender of affiliation? (defalut gender)')
@@ -56,12 +57,21 @@ if __name__ == '__main__':
 	print ("\tOutput string: {}".format(output_str))
 	print ("")
 
-	##########################
-	#     Power-inequality   #
-	##########################
 	if field in ['cs', 'aps']:
 		to_year = 2019
 	else:
 		to_year = 2020 
-	power_inequality(reader, range(from_year, to_year), "power/{}.pkl".format(output_str))
+	##########################
+	#     Power-inequality   #
+	##########################
+	power_adr = "power/{}.pkl".format(output_str)
+	power_inequality(reader, range(from_year, to_year), power_adr)
+
+	##########################
+	#      Organize Edges    #
+	##########################
+	yearly_params_adr = "params/yearly/{}".format(output_str) + "_year_{}.pkl"
+	params_adr = "params/{}.pkl".format(output_str)
+	esimate_params(reader, range(from_year, to_year), yearly_params_adr, params_adr)
+
 

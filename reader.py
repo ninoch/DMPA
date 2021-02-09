@@ -4,7 +4,6 @@ class Reader(object):
 
 	def __init__(self, address):
 		self.adr = address 
-		self.chunksize = 1000
 
 	def read_year(self, year):
 		raise NotImplementedError
@@ -73,33 +72,35 @@ class YearlyGenderReader(GenderReader):
 		super(YearlyGenderReader, self).__init__(address)
 
 	def read_year(self, year):
-		data_iterator = pd.read_csv(self.adr.format(year), chunksize = self.chunksize)
-
-		return data_iterator 
+		df = pd.read_csv(self.adr.format(year))
+		df = self.clean_dataframe(df) 
+		return df 
 
 class YearlyAffiliationReader(AffiliationReader):
 	def __init__(self, address, top_rank):
 		super(YearlyAffiliationReader, self).__init__(address, top_rank)
 
 	def read_year(self, year):
-		data_iterator = pd.read_csv(self.adr.format(year), chunksize = self.chunksize)
-
-		return data_iterator 
+		df = pd.read_csv(self.adr.format(year))
+		df = self.clean_dataframe(df) 
+		return df 
 
 class BunchGenderReader(GenderReader):
 	def __init__(self, address):
 		super(BunchGenderReader, self).__init__(address)
 		self.df = pd.read_csv(self.adr)
+		self.df = self.clean_dataframe(self.df) 
 
 	def read_year(self, year):
 		sub_df = self.df.loc[self.df['year'] == year]
-		return [sub_df]
+		return sub_df
 
 class BunchAffiliationReader(AffiliationReader):
 	def __init__(self, address, top_rank):
 		super(BunchAffiliationReader, self).__init__(address, top_rank)
 		self.df = pd.read_csv(self.adr)
+		self.df = self.clean_dataframe(self.df)
 
 	def read_year(self, year):
 		sub_df = self.df.loc[self.df['year'] == year]
-		return [sub_df]
+		return sub_df
