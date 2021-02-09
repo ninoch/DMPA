@@ -105,7 +105,7 @@ def esimate_params(reader, years, output_yearly, output):
     for year in tqdm(years):
         nodes, node_attr, edge_ordering, seed = get_year_edges(reader, seed, year)
         year_params, params = update_params_year(nodes, node_attr, edge_ordering, params)
-        pickle.dump([year_params, params], open(output_yearly.format(year), "wb"))
+        # pickle.dump([year_params, params], open(output_yearly.format(year), "wb"))
 
     print ("")
     print ("** Estimated parameters: **")
