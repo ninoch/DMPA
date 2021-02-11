@@ -4,42 +4,27 @@
 	From year = 1990
 
 ** Preparing data reader **
-	Reading data from: /Users/nalipour/Desktop/Data/Fairness/fields gender/economics_author_citation_gender.csv
+	Reading data from: data/economics_author_citation_gender.csv
 	Output string: gender_economics_1990
 
-** calculating power-inequality over years **
-	year 1990
-	year 1991
-	year 1992
-	year 1993
-	year 1994
-	year 1995
-	year 1996
-	year 1997
-	year 1998
-	year 1999
-	year 2000
-	year 2001
-	year 2002
-	year 2003
-	year 2004
-	year 2005
-	year 2006
-	year 2007
-	year 2008
-	year 2009
-	year 2010
-	year 2011
-	year 2012
-	year 2013
-	year 2014
-	year 2015
-	year 2016
-	year 2017
-	year 2018
-	year 2019
+** Calculating power-inequality over years 1990-2019 **
 
 ** Network Info **
 	Number of nodes = 1,301,305
+	Number of edges = 94,428,181
 	Edge density = 5.576269572332582e-05
 	Minority = 28.01 %
+
+** Estimating parameters of DMPA model **
+
+** Estimated parameters: **
+	--------------------------------
+	T = 94,395,445
+	r = 0.28
+	p = 0.004
+	q = 0.009
+	E1: ru_b = 1.03, ru_r = -0.06
+	E2: ru_b = 0.63, ru_r = 0.46
+	E3: ru_b = 0.63, ru_r = 0.47
+	--------------------------------
+

@@ -4,3 +4,27 @@
 	From year = 1990
 
 ** Preparing data reader **
+	Reading data from: data/aps_author_citation_gender.csv
+	Output string: gender_aps_1990
+
+** Calculating power-inequality over years 1990-2018 **
+
+** Network Info **
+	Number of nodes = 163,698
+	Number of edges = 17,235,715
+	Edge density = 0.0006431987777431707
+	Minority = 16.39 %
+
+** Estimating parameters of DMPA model **
+
+** Estimated parameters: **
+	--------------------------------
+	T = 17,232,535
+	r = 0.16
+	p = 0.001
+	q = 0.008
+	E1: ru_b = 1.00, ru_r = 0.00
+	E2: ru_b = 0.59, ru_r = 0.44
+	E3: ru_b = 0.59, ru_r = 0.52
+	--------------------------------
+

@@ -1,0 +1,31 @@
+** Input **
+	Network type = affiliation
+	Field of study = cs
+	From year = 1990
+	Elite universities = top-10
+
+** Preparing data reader **
+	Reading data from: data/cs_affiliation/cs_author_citations_{}_ranking.csv
+	Output string: affiliation_cs_1990_10
+
+** Calculating power-inequality over years 1990-2018 **
+
+** Network Info **
+	Number of nodes = 3,274,147
+	Number of edges = 419,322,125
+	Edge density = 3.911574105213826e-05
+	Minority = 1.50 %
+
+** Estimating parameters of DMPA model **
+
+** Estimated parameters: **
+	--------------------------------
+	T = 419,236,479
+	r = 0.02
+	p = 0.001
+	q = 0.007
+	E1: ru_b = 0.76, ru_r = 0.82
+	E2: ru_b = 0.29, ru_r = 0.91
+	E3: ru_b = 0.27, ru_r = 0.91
+	--------------------------------
+

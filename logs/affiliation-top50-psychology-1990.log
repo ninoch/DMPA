@@ -1,0 +1,31 @@
+** Input **
+	Network type = affiliation
+	Field of study = psychology
+	From year = 1990
+	Elite universities = top-50
+
+** Preparing data reader **
+	Reading data from: data/psychology_author_citation_ranking.csv
+	Output string: affiliation_psychology_1990_50
+
+** Calculating power-inequality over years 1990-2019 **
+
+** Network Info **
+	Number of nodes = 666,912
+	Number of edges = 12,743,219
+	Edge density = 2.8651194583334624e-05
+	Minority = 15.08 %
+
+** Estimating parameters of DMPA model **
+
+** Estimated parameters: **
+	--------------------------------
+	T = 12,607,078
+	r = 0.15
+	p = 0.024
+	q = 0.026
+	E1: ru_b = 0.77, ru_r = 0.48
+	E2: ru_b = 0.52, ru_r = 0.72
+	E3: ru_b = 0.54, ru_r = 0.72
+	--------------------------------
+
