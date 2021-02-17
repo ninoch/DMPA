@@ -10,6 +10,7 @@ flags.DEFINE_string('network_type', 'gender', 'The type of network: gender of af
 flags.DEFINE_string('field', 'management', 'The field of study: management, political_science, psychology, economics, aps, cs (default management)')
 flags.DEFINE_string('from_year', '1990', 'The year to start the analysis (defalut 1990)')
 flags.DEFINE_string('top', '100', 'The cut-off to consider university as elite based on ranking (defalut 100)')
+flags.DEFINE_string('delta', '0', 'The preferential attachment parameter')
 
 FLAGS = flags.FLAGS
 FLAGS(sys.argv)
@@ -23,12 +24,14 @@ if __name__ == '__main__':
 	field = FLAGS.field 
 	from_year = int(FLAGS.from_year)
 	top = int(FLAGS.top)
+	delta = int(FLAGS.delta)
 	print ("** Input **")
 	print ("\tNetwork type = {}".format(network_type))
 	print ("\tField of study = {}".format(field))
 	print ("\tFrom year = {}".format(from_year))
 	if network_type == 'affiliation':
 		print ("\tElite universities = top-{}".format(top))
+	print ("\tDelta = {}".format(delta))
 	print ("")
 
 	##########################
@@ -72,6 +75,6 @@ if __name__ == '__main__':
 	##########################
 	yearly_params_adr = "params/yearly/{}".format(output_str) + "_year_{}.pkl"
 	params_adr = "params/{}.pkl".format(output_str)
-	esimate_params(reader, range(from_year, to_year), yearly_params_adr, params_adr)
+	esimate_params(reader, range(from_year, to_year), delta, yearly_params_adr, params_adr)
 
 

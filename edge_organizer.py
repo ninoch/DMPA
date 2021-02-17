@@ -50,7 +50,7 @@ def get_year_edges(reader, seed, year):
     return y_nodes, y_node_attr, y_edge_ordering, seed 
 
 
-def update_params_year(nodes, node_attr, edge_ordering, params):
+def update_params_year(nodes, node_attr, edge_ordering, delta, params):
     for u, v, year in edge_ordering:
         params['cnt'] += 1
         event_index = None 
@@ -83,7 +83,11 @@ def update_params_year(nodes, node_attr, edge_ordering, params):
         if node_attr[v] == 'majority': params['bo'] += 1
         if node_attr[u] == 'majority': params['bi'] += 1
 
-    E1, E2, E3 = get_e_matrices(params['ri'], params['ro'], params['bi'], params['bo'], params['counter_agg'])
+    min_size = len(params['red_nodes'])
+    maj_size = len(params['new_nodes']) - len(params['red_nodes'])
+
+    E1, E2, E3 = get_e_matrices(params['ri'] + min_size * delta, params['ro'] + min_size * delta, 
+                                params['bi'] + maj_size * delta, params['bo'] + maj_size * delta, params['counter_agg'])
 
     year_params = {
         'N': params['cnt'],
@@ -96,7 +100,7 @@ def update_params_year(nodes, node_attr, edge_ordering, params):
     }
     return year_params, params 
 
-def esimate_params(reader, years, output_yearly, output):
+def esimate_params(reader, years, delta, output_yearly, output):
     print ("** Estimating parameters of DMPA model **")
     begin, begin_attr = get_first_node(reader, years[0])
 
@@ -104,7 +108,7 @@ def esimate_params(reader, years, output_yearly, output):
     params = init_params(begin, begin_attr)
     for year in tqdm(years):
         nodes, node_attr, edge_ordering, seed = get_year_edges(reader, seed, year)
-        year_params, params = update_params_year(nodes, node_attr, edge_ordering, params)
+        year_params, params = update_params_year(nodes, node_attr, edge_ordering, delta, params)
         # pickle.dump([year_params, params], open(output_yearly.format(year), "wb"))
 
     print ("")
