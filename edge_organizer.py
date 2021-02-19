@@ -96,7 +96,8 @@ def update_params_year(nodes, node_attr, edge_ordering, delta, params):
         'beta': params['beta_agg'] / params['cnt'],
         'E1': E1, 
         'E2': E2,
-        'E3': E3
+        'E3': E3,
+        'power_inequality': (params['ro'] * params['bi']) / (params['ri'] * params['bo'])
     }
     return year_params, params 
 
@@ -112,14 +113,17 @@ def esimate_params(reader, years, delta, output_yearly, output):
         # pickle.dump([year_params, params], open(output_yearly.format(year), "wb"))
 
     print ("")
-    print ("** Estimated parameters: **")
+    print ("** Estimated parameters (Delta = {}) **".format(delta))
     print ("\t--------------------------------")
     print("\tT = {0}\n\tr = {1:.2f}".format(f"{year_params['N']:,}", year_params['R']))
     print ("\tp = {0:.3f}\n\tq = {1:.3f}".format(year_params['alpha'], year_params['beta']))
     print ("\tE1: ru_b = {0:.2f}, ru_r = {1:.2f}".format(year_params['E1'][0][0], year_params['E1'][1][1]))
     print ("\tE2: ru_b = {0:.2f}, ru_r = {1:.2f}".format(year_params['E2'][0][0], year_params['E2'][1][1]))
     print ("\tE3: ru_b = {0:.2f}, ru_r = {1:.2f}".format(year_params['E3'][0][0], year_params['E3'][1][1]))
+    print ("\tPower Inequality = {0:.2f}".format(year_params['power_inequality']))
     print ("\t--------------------------------")
     print ("")
     pickle.dump([year_params, params], open(output, "wb"))
+
+    return year_params
 

@@ -1,5 +1,7 @@
+import random
 import numpy as np
 import pandas as pd
+from scipy.stats import bernoulli
 
 def collect_good_edges(edges, year, seed):
     year_df = edges.reindex(edges.index.repeat(edges.times)).reset_index() # for considering multi-edges 
@@ -62,11 +64,12 @@ def get_e_matrices(ri, ro, bi, bo, counter):
 
     
     
-    E1 = [[ru_b1, 1 - ru_r1], 
-          [1 - ru_b1, ru_r1]]
-    E2 = [[ru_b2, 1 - ru_r2], 
-          [1 - ru_b2, ru_r2]]
-    E3 = [[ru_b3, 1 - ru_r3], 
-          [1 - ru_b3, ru_r3]]
+    E1 = np.array([[ru_b1, 1 - ru_r1], 
+          [1 - ru_b1, ru_r1]])
+    E2 = np.array([[ru_b2, 1 - ru_r2], 
+          [1 - ru_b2, ru_r2]])
+    E3 = np.array([[ru_b3, 1 - ru_r3], 
+          [1 - ru_b3, ru_r3]])
 
     return E1, E2, E3 
+
