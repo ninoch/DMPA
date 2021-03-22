@@ -173,3 +173,7 @@ def generate_edges(e, r, E1, E2, E3, alpha, beta, delta_in, delta_out):
     I = (indeg_sum[0] * outdeg_sum[1]) / (indeg_sum[1] * outdeg_sum[0]) # (ro * bi) / (ri * bo)
     return num_nodes, color, edge_list, I
 
+
+RED = 0.5; ALPHA = 0.03; BETA = 0.032; RHO_B = 0.56; RHO_R = 0.55; DELTA = 100
+theoretical_power(RED, ALPHA, BETA, RHO_B, RHO_R, DELTA)
+

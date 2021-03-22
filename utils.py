@@ -33,43 +33,24 @@ def collect_good_edges(edges, year, seed):
 
     return nodes, node_attr, edge_ordering, seed 
 
-def get_e_matrices(ri, ro, bi, bo, counter):
+def get_e3_matrix(ri, ro, bi, bo, counter, r, p, q, delta):
     
     ri, bi = ri / (ri + bi), bi / (ri + bi)
     ro, bo = ro / (ro + bo), bo / (ro + bo)
     
-    x = counter[0][1][0] / (counter[0][1][0] + counter[0][0][1] - counter[0][0][0]) # rr / (rr + br)
-    y = counter[0][0][0] / (counter[0][0][0] + counter[0][1][1] - counter[0][1][0]) # bb / (bb + rb)
-#     ru_r1 = (x * (bo - y * ro - y * bo)) / (ro * (1 - x - y))
-#     ru_b1 = (y * (ro - x * ro - x * bo)) / (bo * (1 - x - y))
-    
-    ru_r1 = (x * (bo - y)) / (ro * (1 - x - y))
-    ru_b1 = (y * (ro - x)) / (bo * (1 - x - y))
-    
-    # print ("\t Event 1: x = {0:.3f}, y = {1:.3f}, ru_r1 = {2:.3f}, ru_b1 = {3:.3f}, ro = {4:.3f}, bo = {5:.3f}".format(x, y, ru_r1, ru_b1, ro, bo))
-    
-    
-    a = counter[1][1][0] / counter[1][1][1] # rr / r?
-    b = counter[1][0][0] / counter[1][0][1] # bb / b? 
-    ru_r2 = (a * bi) / (a * bi + (1 - a) * ri) 
-    ru_b2 = (b * ri) / (b * ri + (1 - b) * bi)
-    # print ("\t Event 2: a = {0:.3f}, b = {1:.3f}, ru_r2 = {2:.3f}, ru_b2 = {3:.3f}, ri = {4:.3f}, bi = {5:.3f}".format(a, b, ru_r2, ru_b2, ri, bi))
-    
-    
-    a_ = counter[2][1][0] / counter[2][1][1] # rr / r?
-    b_ = counter[2][0][0] / counter[2][0][1] # bb / b? 
-    ru_r3 = (a_ * bi) / (a_ * bi + (1 - a_) * ri) 
-    ru_b3 = (b_ * ri) / (b_ * ri + (1 - b_) * bi)
-    # print ("\t Event 3: a = {0:.3f}, b = {1:.3f}, ru_r2 = {2:.3f}, ru_b2 = {3:.3f}, ri = {4:.3f}, bi = {5:.3f}, ro = {6:.3f}, bo = {7:.3f}".format(a_, b_, ru_r3, ru_b3, ri, bi, ro, bo))
+    x = counter[2][1][0] / counter[2][1][1] # rr / ?r - red follower 
+    y = counter[2][0][0] / counter[2][0][1] # bb / ?b - blue follower 
 
-    
-    
-    E1 = np.array([[ru_b1, 1 - ru_r1], 
-          [1 - ru_b1, ru_r1]])
-    E2 = np.array([[ru_b2, 1 - ru_r2], 
-          [1 - ru_b2, ru_r2]])
+    a = (ro + (p + q) * r * delta) * (ri + (p + q) * r * delta)
+    b = (bo + (p + q) * (1 - r) * delta) * (ri + (p + q) * r * delta)
+    ru_r3 = (b * x) / (a - a * x + b * x)
+
+    a = (bo + (p + q) * (1 - r) * delta) * (bi + (p + q) * (1 - r) * delta)
+    b = (ro + (p + q) * r * delta) * (bi + (p + q) * (1 - r) * delta)
+    ru_b3 = (b * y) / (a - a * y + b * y)
+
     E3 = np.array([[ru_b3, 1 - ru_r3], 
           [1 - ru_b3, ru_r3]])
 
-    return E1, E2, E3 
+    return E3 
 

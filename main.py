@@ -79,13 +79,16 @@ if __name__ == '__main__':
 	##########################
 	best_theo_power = float('inf')
 	best_delta = None 
+	best_ind = None 
 	best_params = None 
-	for delta in [0, 5, 20, 50, 100, 1000]:
+	large_range = [1, 2, 3, 4, 5, 6, 10, 20, 50, 100, 1000]
+
+	for ind, delta in enumerate(large_range): 
 		print ("--------------------------------------------")
 		print ("\t\t Delta = {} ".format(delta))
 		print ("--------------------------------------------")
 		output_str_d = "d{}".format(delta) + "_" + output_str
-		yearly_params_adr = "params/yearly/{}".format(output_str_d) + "_year_{}.pkl"
+		yearly_params_adr = "params/yearly/{}".format(output_str_d) + ".pkl"
 		params_adr = "params/{}.pkl".format(output_str_d)
 		params = esimate_params(reader, range(from_year, to_year), delta, yearly_params_adr, params_adr)
 
@@ -97,6 +100,28 @@ if __name__ == '__main__':
 			best_theo_power = theo_power
 			best_params = params.copy()
 			best_delta = delta 
+			best_ind = ind 
+
+	# jumps = int((large_range[best_ind + 1] - large_range[best_ind]) / 4)
+	# small_range = range(large_range[best_ind] + jumps, large_range[best_ind + 1], jumps)
+	# for delta in small_range:
+	# 	print ("--------------------------------------------")
+	# 	print ("\t\t Delta = {} ".format(delta))
+	# 	print ("--------------------------------------------")
+	# 	output_str_d = "d{}".format(delta) + "_" + output_str
+	# 	yearly_params_adr = "params/yearly/{}".format(output_str_d) + ".pkl"
+	# 	params_adr = "params/{}.pkl".format(output_str_d)
+	# 	params = esimate_params(reader, range(from_year, to_year), delta, yearly_params_adr, params_adr)
+
+	# 	actual_power = params['power_inequality']
+
+	# 	theo_power, guarantee = theoretical_power(params['R'], params['alpha'], params['beta'], params['E3'][0][0], params['E3'][1][1], delta)
+
+	# 	if guarantee == True and (abs(actual_power - theo_power) < abs(actual_power - best_theo_power)):
+	# 		best_theo_power = theo_power
+	# 		best_params = params.copy()
+	# 		best_delta = delta 
+
 
 	print ("==============================================")
 	print ("\tDelta = {0} (diff = {1:.3f})".format(best_delta, actual_power - best_theo_power))
@@ -105,6 +130,6 @@ if __name__ == '__main__':
 	print ("\tp = {0:.3f}".format(best_params['alpha']))
 	print ("\tq = {0:.3f}".format(best_params['beta']))
 	print ("\tE: ru_r = {0:.2f}, ru_b = {1:.2f}".format(best_params['E3'][1][1], best_params['E3'][0][0]))
-	print ("\tActual Power = {0:.2f}".format(best_params['power_inequality']))
-	print ("\tTheoretical Power = {0:.2f}".format(best_theo_power))
+	print ("\tActual Power = {0:.3f}".format(best_params['power_inequality']))
+	print ("\tTheoretical Power = {0:.3f}".format(best_theo_power))
 	print ("==============================================")

@@ -5,7 +5,7 @@ from tqdm import tqdm
 from collections import Counter
 
 from reader import * 
-from utils import get_e_matrices, collect_good_edges
+from utils import get_e3_matrix, collect_good_edges
 
 def init_params(begin, begin_attr):
     new_nodes = set()
@@ -86,16 +86,14 @@ def update_params_year(nodes, node_attr, edge_ordering, delta, params):
     min_size = len(params['red_nodes'])
     maj_size = len(params['new_nodes']) - len(params['red_nodes'])
 
-    E1, E2, E3 = get_e_matrices(params['ri'] + min_size * delta, params['ro'] + min_size * delta, 
-                                params['bi'] + maj_size * delta, params['bo'] + maj_size * delta, params['counter_agg'])
+    E3 = get_e3_matrix(params['ri'], params['ro'], params['bi'], params['bo'], params['counter_agg'],
+                       min_size / (min_size + maj_size), params['alpha_agg'] / params['cnt'], params['beta_agg'] / params['cnt'], delta)
 
     year_params = {
         'N': params['cnt'],
         'R': len(params['red_nodes']) / len(params['new_nodes']),
         'alpha': params['alpha_agg'] / params['cnt'],
         'beta': params['beta_agg'] / params['cnt'],
-        'E1': E1, 
-        'E2': E2,
         'E3': E3,
         'power_inequality': (params['ro'] * params['bi']) / (params['ri'] * params['bo'])
     }
@@ -107,22 +105,25 @@ def esimate_params(reader, years, delta, output_yearly, output):
 
     seed = set([begin])
     params = init_params(begin, begin_attr)
+    params_by_year = {} 
     for year in tqdm(years):
         nodes, node_attr, edge_ordering, seed = get_year_edges(reader, seed, year)
         year_params, params = update_params_year(nodes, node_attr, edge_ordering, delta, params)
-        # pickle.dump([year_params, params], open(output_yearly.format(year), "wb"))
+        params_by_year[year] = params.copy()
+        import copy 
+        params_by_year[year]['counter_agg'] = copy.deepcopy(params['counter_agg'])
 
     print ("")
     print ("** Estimated parameters (Delta = {}) **".format(delta))
     print ("\t--------------------------------")
     print("\tT = {0}\n\tr = {1:.2f}".format(f"{year_params['N']:,}", year_params['R']))
     print ("\tp = {0:.3f}\n\tq = {1:.3f}".format(year_params['alpha'], year_params['beta']))
-    print ("\tE1: ru_b = {0:.2f}, ru_r = {1:.2f}".format(year_params['E1'][0][0], year_params['E1'][1][1]))
-    print ("\tE2: ru_b = {0:.2f}, ru_r = {1:.2f}".format(year_params['E2'][0][0], year_params['E2'][1][1]))
     print ("\tE3: ru_b = {0:.2f}, ru_r = {1:.2f}".format(year_params['E3'][0][0], year_params['E3'][1][1]))
     print ("\tPower Inequality = {0:.2f}".format(year_params['power_inequality']))
     print ("\t--------------------------------")
     print ("")
+
+    pickle.dump(params_by_year, open(output_yearly.format(year), "wb"))
     pickle.dump([year_params, params], open(output, "wb"))
 
     return year_params
