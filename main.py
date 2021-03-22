@@ -19,10 +19,6 @@ FLAGS(sys.argv)
 
 
 if __name__ == '__main__':
-	# Gender Management: 
-	# r, p, q, ru_r, ru_b, delta = 0.35, 0.025, 0.058, 0.46, 0.62, 0
-	# E = np.array([[ru_b, 1 - ru_r], [1 - ru_b, ru_r]])
-	# DMPA(5000, r, E, E, E, p, q, 100, 100)
 	##########################
 	#        Input           #
 	##########################
@@ -101,27 +97,6 @@ if __name__ == '__main__':
 			best_params = params.copy()
 			best_delta = delta 
 			best_ind = ind 
-
-	# jumps = int((large_range[best_ind + 1] - large_range[best_ind]) / 4)
-	# small_range = range(large_range[best_ind] + jumps, large_range[best_ind + 1], jumps)
-	# for delta in small_range:
-	# 	print ("--------------------------------------------")
-	# 	print ("\t\t Delta = {} ".format(delta))
-	# 	print ("--------------------------------------------")
-	# 	output_str_d = "d{}".format(delta) + "_" + output_str
-	# 	yearly_params_adr = "params/yearly/{}".format(output_str_d) + ".pkl"
-	# 	params_adr = "params/{}.pkl".format(output_str_d)
-	# 	params = esimate_params(reader, range(from_year, to_year), delta, yearly_params_adr, params_adr)
-
-	# 	actual_power = params['power_inequality']
-
-	# 	theo_power, guarantee = theoretical_power(params['R'], params['alpha'], params['beta'], params['E3'][0][0], params['E3'][1][1], delta)
-
-	# 	if guarantee == True and (abs(actual_power - theo_power) < abs(actual_power - best_theo_power)):
-	# 		best_theo_power = theo_power
-	# 		best_params = params.copy()
-	# 		best_delta = delta 
-
 
 	print ("==============================================")
 	print ("\tDelta = {0} (diff = {1:.3f})".format(best_delta, actual_power - best_theo_power))

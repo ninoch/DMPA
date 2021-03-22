@@ -20,10 +20,6 @@ FLAGS(sys.argv)
 
 
 if __name__ == '__main__':
-	# Gender Management: 
-	# r, p, q, ru_r, ru_b, delta = 0.35, 0.025, 0.058, 0.46, 0.62, 0
-	# E = np.array([[ru_b, 1 - ru_r], [1 - ru_b, ru_r]])
-	# DMPA(5000, r, E, E, E, p, q, 100, 100)
 	##########################
 	#        Input           #
 	##########################
