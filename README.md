@@ -1,6 +1,6 @@
 # DMPA (Directed Mixed Preferential Attachment)
 
-This is the source code of paper ["Emergence of Structural Inequalities in Scientific Citation Networks".](https://arxiv.org/pdf/2103.10944.pdf). If you used the code or data, please cite the paper:
+This is the source code of paper ["Emergence of Structural Inequalities in Scientific Citation Networks".](https://arxiv.org/pdf/2103.10944.pdf). Please cite our work if you found the code or the data useful. 
 
 ```
 @inproceedings{nettasinghe2021emergence,
@@ -9,6 +9,9 @@ This is the source code of paper ["Emergence of Structural Inequalities in Scien
   year={2021}
 }
 ```
+
+# Data 
+Data can be found in [Open Science Framework](https://osf.io/djxtf/). 
 
 # How to run? 
 To run gender networks, specify the field of study and starting year as follow: 
@@ -23,5 +26,3 @@ python main.py --network_type=affiliation --field=management --from_year=1990 --
 
 The maximum value of `--top` is 100. 
 
-# Data 
-Data can be found in [Open Science Framework](https://osf.io/djxtf/). 
