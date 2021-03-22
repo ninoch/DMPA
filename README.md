@@ -1,6 +1,7 @@
 # DMPA (Directed Mixed Preferential Attachment)
 
-This is the source code of paper ["Emergence of Structural Inequalities in Scientific Citation Networks".](https://arxiv.org/pdf/2103.10944.pdf). Please cite our work if you found the code or the data useful. 
+This is the source code of paper ["Emergence of Structural Inequalities in Scientific Citation Networks"](https://arxiv.org/pdf/2103.10944.pdf).
+Please cite our work if you found the code or the data useful: 
 
 ```
 @inproceedings{nettasinghe2021emergence,
