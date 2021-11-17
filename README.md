@@ -14,6 +14,12 @@ Please cite our work if you found the code or the data useful:
 # Data 
 Data can be found in [Open Science Framework](https://osf.io/djxtf/). The "management" field of study is the smallest dataset which you can download and check the code. 
 
+# Install
+You can find required packages and versions in requirements.txt and you can install them using: 
+```
+conda create --name <env> --file requirements.txt
+```
+
 # How to run? 
 To run gender networks, specify the field of study and starting year as follow: 
 ```
@@ -26,4 +32,6 @@ python main.py --network_type=affiliation --field=management --from_year=1990 --
 ```
 
 The maximum value of `--top` is 100. 
+
+For generating the figures, you need to run notebooks in `figures/` folder. 
 
