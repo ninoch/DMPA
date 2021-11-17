@@ -36,6 +36,7 @@ python main.py --network_type=affiliation --field=management --from_year=1990 --
 The maximum value of `--top` is 100. 
 
 Required Time for Management: < 1 hour 
+
 For other field of studies (like computer science) it can take 1-2 days depending on the computer. 
 
 For generating the figures, you need to run notebooks in `figures/` folder. 
