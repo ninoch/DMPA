@@ -12,7 +12,7 @@ Please cite our work if you found the code or the data useful:
 ```
 
 # Data 
-Data can be found in [Open Science Framework](https://osf.io/djxtf/). The "management" field of study is the smallest dataset which you can download and check the code. 
+Data can be found in [Open Science Framework](https://osf.io/djxtf/). The "management" field of study is the smallest dataset which has been added to the data folder. 
 
 # Install
 You can find required packages and versions in requirements.txt and you can install them using: 
